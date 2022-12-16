@@ -1,41 +1,86 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 body{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
 }
 
-.display{
+.btn{
     height: 75px;
-    font-size: 50px;
-    text-align: right;
-    margin-right: 10px;
+    width: 75px;
+    margin: 15px;
+    font-size: 40px;
 }
 
-.container{
-    background-color: rgb(0, 0, 0);
-    width: 350px;
-    height: 500px;
+.number{
+    border: 1px solid greenyellow;
+    border-radius: 10px;
+}
+.number:hover{
+    background-color: green;
+}
+
+.operator{
+    border: 1px solid steelblue;
+    border-radius: 10px;
+}
+
+.operator:hover{
+    background-color: paleturquoise;
+}
+
+.decimal{
+    border: 1px solid gold;
+    border-radius: 10px;
+}
+
+.decimal:hover{
+    background-color: palegoldenrod;
+}
+
+.equal{
+    border: 1px solid pink;
+    border-radius: 10px;
+}
+
+.equal:hover{
+    background-color: plum;
+}
+
+.clear{
+    border: 1px solid purple;
+    border-radius: 10px;
+}
+
+.clear:hover{
+    background-color: palevioletred;
+}
+
+#screen{
+    width:300px;
+    border: 1px solid salmon;
+    height: 75px;
+    margin: 15px;
     display: flex;
     flex-direction: column;
-    margin: auto;
-    margin-top: 200px;
-    border: none;
-    border-radius: 8%;
-}
-button{
-    width: 80px;
-    height: 80px;
-    margin: 2px;
-    border: none;
-    border-radius: 50%;
-    font-size: 25px;
-    background-color: rgb(39, 51, 48);
-    color: white;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
-.operators{
-    background-color: orange;
+.first-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
+
+.previous{
+    font-size: 20px;
+}
+
+.current{
+    font-size: 30px;
+}
+
