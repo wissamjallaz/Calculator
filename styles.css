@@ -49,12 +49,12 @@ body{
     background-color: plum;
 }
 
-.clear{
+#clear-btn{
     border: 1px solid purple;
     border-radius: 10px;
 }
 
-.clear:hover{
+#clear-btn:hover{
     background-color: palevioletred;
 }
 

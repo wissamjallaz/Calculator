@@ -1,60 +1,88 @@
-display = document.querySelector('.display')
-numberButtons = document.querySelectorAll('.number');
-operatorButtons = document.querySelectorAll('.operators')
+let operator = '';
+let previousValue = '';
+let currentValue = '';
 
+document.addEventListener("DOMContentLoaded", function(){
+    let clear = document.querySelector("#clear-btn");
+    let equal = document.querySelector(".equal");
+    let decimal = document.querySelector(".decimal");
+    let numbers = document.querySelectorAll(".number");
+    let operators = document.querySelectorAll(".operator");
+    let previousScreen = document.querySelector(".previous");
+    let currentScreen = document.querySelector(".current");
 
-function add(a, b){
-    return a + b;
-}
-
-function subtract(a, b){
-    return a - b;
-}
-
-function multiply(a, b){
-    return a * b;
-}
-
-function divide(a, b){
-    return a / b;
-}
-
-function percentage(a){
-    a/100
-}
-
-function operate(operator, a, b){
-    switch (operator){
-        case "+":
-            add(a,b);
-            break;
-        case "-":
-            subtract(a,b);
-            break;
-        case "*":
-            multiply(a,b);
-            break;
-        case "/":
-            divide(a,b);
-            break;
-        case "%":
-            percentage(a,b);
-            break;
-        default:
-            console.log("Enter Valid Operator");
-    }
-}
-
-function populate(){
-    numberButtons.forEach(button=>{
-        button.addEventListener('click', ()=>{
-            display.textContent = +button.innerHTML;
-            input = +button.innerHTML;
+    numbers.forEach(number =>{
+        number.addEventListener('click', function(e){
+            handleNumber(e.target.textContent);
+            currentScreen.textContent = currentValue;
+        } )
     })
-})}
 
-operatorButtons.forEach(operator=>{
-    operator.addEventListener('click', ()=>{
-
+    operators.forEach(op =>{
+        op.addEventListener('click', function(e){
+            handleOperator(e.target.textContent);
+            previousScreen.textContent = previousValue + " " + operator;
+            currentScreen.textContent = currentValue;
+        })
     })
+
+    clear.addEventListener('click', ()=>{
+        previousValue = '';
+        currentValue = '';
+        operator = '';
+        previousScreen.textContent = currentValue;
+        currentScreen.textContent = currentValue;
+    })
+
+    equal.addEventListener('click', function(){
+        if(currentValue != '' && previousValue != ''){
+        calculate();
+        previousScreen.textContent = '';
+        if(previousValue.length <= 5){
+            currentScreen.textContent = previousValue;
+        }
+        else{
+            currentScreen.textContent = previousValue.slice(0,5) + "...";
+        }
+        currentScreen.textContent = previousValue;
+    }})
 })
+
+
+function handleNumber(num){
+    if(currentValue.length <= 5)
+    currentValue += num;
+}
+
+function handleOperator(op){
+    operator = op;
+    previousValue = currentValue;
+    currentValue = '';
+}
+
+
+function calculate(){
+    previousValue = Number(previousValue);
+    currentValue = Number(currentValue);
+
+    if(operator === '+'){
+        previousValue += currentValue;
+    }
+    else if(operator === '-'){
+        previousValue -= currentValue;
+    }
+    else if(operator ==='x'){
+        previousValue *= currentValue;
+    }
+    else{
+        previousValue /= currentValue;
+    }
+
+    previousValue = roundNumber(previousValue);
+    previousValue = previousValue.toString();
+    currentValue = previousValue.toString();
+}
+
+function roundNumber(num){
+    return Math.round((num * 1000) / 1000);
+}
